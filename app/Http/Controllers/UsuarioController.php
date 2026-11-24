@@ -8,9 +8,18 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
 use Illuminate\View\View;
+use App\Support\Catalogo;
 
 class UsuarioController extends Controller
 {
+    private function catalogos(): array
+    {
+        return [
+            'roles' => Catalogo::opciones('roles'),
+            'estados' => Catalogo::opciones('estados.usuarios'),
+        ];
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -26,7 +35,7 @@ class UsuarioController extends Controller
      */
     public function create(): View
     {
-        return view('usuarios.create');
+        return view('usuarios.create', $this->catalogos());
     }
 
     /**
@@ -39,8 +48,8 @@ class UsuarioController extends Controller
             'apellido' => ['required', 'string', 'max:255'],
             'correo' => ['required', 'string', 'email', 'max:255', 'unique:usuarios,correo'],
             'contraseña' => ['required', 'string', 'min:8', 'max:255'],
-            'rol' => ['required', 'string', 'max:255'],
-            'estado' => ['required', 'string', 'max:255'],
+            'rol' => ['required', Catalogo::regla('roles')],
+            'estado' => ['required', Catalogo::regla('estados.usuarios')],
         ]);
         $datos['contraseña'] = Hash::make($datos['contraseña']);
 
@@ -62,7 +71,7 @@ class UsuarioController extends Controller
      */
     public function edit(Usuario $usuario): View
     {
-        return view('usuarios.edit', compact('usuario'));
+        return view('usuarios.edit', ['usuario' => $usuario] + $this->catalogos());
     }
 
     /**
@@ -81,8 +90,8 @@ class UsuarioController extends Controller
                 Rule::unique('usuarios', 'correo')->ignore($usuario->id),
             ],
             'contraseña' => ['nullable', 'string', 'min:8', 'max:255'],
-            'rol' => ['required', 'string', 'max:255'],
-            'estado' => ['required', 'string', 'max:255'],
+            'rol' => ['required', Catalogo::regla('roles')],
+            'estado' => ['required', Catalogo::regla('estados.usuarios')],
         ]);
 
         if (blank($datos['contraseña'] ?? null)) {

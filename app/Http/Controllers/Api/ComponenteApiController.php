@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Componentes;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use App\Support\Catalogo;
 
 class ComponenteApiController extends Controller
 {
@@ -22,7 +23,7 @@ class ComponenteApiController extends Controller
             'nombre' => 'required|string|max:255',
             'descripcion' => 'required|string|max:255',
             'cantidad' => 'required|integer|min:0',
-            'estado' => 'required|string|max:255',
+            'estado' => ['required', Catalogo::regla('estados.componentes')],
             'recuperacion_id' => 'required|exists:recuperacions,id',
         ]);
 
@@ -41,7 +42,7 @@ class ComponenteApiController extends Controller
             'nombre' => 'sometimes|string|max:255',
             'descripcion' => 'sometimes|string|max:255',
             'cantidad' => 'sometimes|integer|min:0',
-            'estado' => 'sometimes|string|max:255',
+            'estado' => ['sometimes', Catalogo::regla('estados.componentes')],
             'recuperacion_id' => 'sometimes|exists:recuperacions,id',
         ]);
 

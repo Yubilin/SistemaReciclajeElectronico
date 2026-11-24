@@ -8,6 +8,7 @@ use App\Models\Usuario;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use App\Support\Catalogo;
 
 class RecepcionController extends Controller
 {
@@ -16,7 +17,7 @@ class RecepcionController extends Controller
         return [
             'fecha' => ['label' => 'Fecha', 'type' => 'date'],
             'observaciones' => ['label' => 'Observaciones', 'type' => 'text'],
-            'estado' => ['label' => 'Estado', 'type' => 'text'],
+            'estado' => ['label' => 'Estado', 'type' => 'select', 'options' => Catalogo::opciones('estados.recepciones')],
             'usuario_id' => [
                 'label' => 'Usuario',
                 'type' => 'select',
@@ -59,7 +60,7 @@ class RecepcionController extends Controller
         $datos = $request->validate([
             'fecha' => ['required', 'date'],
             'observaciones' => ['required', 'string', 'max:255'],
-            'estado' => ['required', 'string', 'max:255'],
+            'estado' => ['required', Catalogo::regla('estados.recepciones')],
             'usuario_id' => ['required', 'integer', 'exists:usuarios,id'],
             'entregante_id' => ['required', 'integer', 'exists:entregantes,id'],
         ]);
@@ -94,7 +95,7 @@ class RecepcionController extends Controller
         $datos = $request->validate([
             'fecha' => ['required', 'date'],
             'observaciones' => ['required', 'string', 'max:255'],
-            'estado' => ['required', 'string', 'max:255'],
+            'estado' => ['required', Catalogo::regla('estados.recepciones')],
             'usuario_id' => ['required', 'integer', 'exists:usuarios,id'],
             'entregante_id' => ['required', 'integer', 'exists:entregantes,id'],
         ]);

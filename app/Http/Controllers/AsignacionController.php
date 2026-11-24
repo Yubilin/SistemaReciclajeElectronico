@@ -8,6 +8,7 @@ use App\Models\Usuario;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use App\Support\Catalogo;
 
 class AsignacionController extends Controller
 {
@@ -17,8 +18,8 @@ class AsignacionController extends Controller
             'numeroTurno' => ['label' => 'Número de turno', 'type' => 'number'],
             'fechaInicio' => ['label' => 'Fecha de inicio', 'type' => 'date'],
             'fechaFinalizacion' => ['label' => 'Fecha de finalización', 'type' => 'date'],
-            'prioridad' => ['label' => 'Prioridad', 'type' => 'text'],
-            'estado' => ['label' => 'Estado', 'type' => 'text'],
+            'prioridad' => ['label' => 'Prioridad', 'type' => 'select', 'options' => Catalogo::opciones('prioridades')],
+            'estado' => ['label' => 'Estado', 'type' => 'select', 'options' => Catalogo::opciones('estados.asignaciones')],
             'observacion' => ['label' => 'Observación', 'type' => 'text'],
             'usuario_id' => [
                 'label' => 'Usuario',
@@ -63,8 +64,8 @@ class AsignacionController extends Controller
             'numeroTurno' => ['required', 'integer', 'min:0'],
             'fechaInicio' => ['required', 'date'],
             'fechaFinalizacion' => ['required', 'date', 'after_or_equal:fechaInicio'],
-            'prioridad' => ['required', 'string', 'max:255'],
-            'estado' => ['required', 'string', 'max:255'],
+            'prioridad' => ['required', Catalogo::regla('prioridades')],
+            'estado' => ['required', Catalogo::regla('estados.asignaciones')],
             'observacion' => ['required', 'string', 'max:255'],
             'usuario_id' => ['required', 'integer', 'exists:usuarios,id'],
             'material_recibido_id' => ['required', 'integer', 'exists:material_recibidos,id'],
@@ -101,8 +102,8 @@ class AsignacionController extends Controller
             'numeroTurno' => ['required', 'integer', 'min:0'],
             'fechaInicio' => ['required', 'date'],
             'fechaFinalizacion' => ['required', 'date', 'after_or_equal:fechaInicio'],
-            'prioridad' => ['required', 'string', 'max:255'],
-            'estado' => ['required', 'string', 'max:255'],
+            'prioridad' => ['required', Catalogo::regla('prioridades')],
+            'estado' => ['required', Catalogo::regla('estados.asignaciones')],
             'observacion' => ['required', 'string', 'max:255'],
             'usuario_id' => ['required', 'integer', 'exists:usuarios,id'],
             'material_recibido_id' => ['required', 'integer', 'exists:material_recibidos,id'],

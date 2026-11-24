@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\asignacion;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use App\Support\Catalogo;
 
 class AsignacionApiController extends Controller
 {
@@ -22,8 +23,8 @@ class AsignacionApiController extends Controller
             'numeroTurno' => 'required|integer|min:0',
             'fechaInicio' => 'required|date',
             'fechaFinalizacion' => 'required|date|after_or_equal:fechaInicio',
-            'prioridad' => 'required|string|max:255',
-            'estado' => 'required|string|max:255',
+            'prioridad' => ['required', Catalogo::regla('prioridades')],
+            'estado' => ['required', Catalogo::regla('estados.asignaciones')],
             'observacion' => 'required|string|max:255',
             'usuario_id' => 'required|exists:usuarios,id',
             'material_recibido_id' => 'required|exists:material_recibidos,id',
@@ -44,8 +45,8 @@ class AsignacionApiController extends Controller
             'numeroTurno' => 'sometimes|integer|min:0',
             'fechaInicio' => 'sometimes|date',
             'fechaFinalizacion' => 'sometimes|date|after_or_equal:fechaInicio',
-            'prioridad' => 'sometimes|string|max:255',
-            'estado' => 'sometimes|string|max:255',
+            'prioridad' => ['sometimes', Catalogo::regla('prioridades')],
+            'estado' => ['sometimes', Catalogo::regla('estados.asignaciones')],
             'observacion' => 'sometimes|string|max:255',
             'usuario_id' => 'sometimes|exists:usuarios,id',
             'material_recibido_id' => 'sometimes|exists:material_recibidos,id',

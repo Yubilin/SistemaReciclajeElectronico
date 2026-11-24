@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\ComponentesController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EntreganteController;
 use App\Http\Controllers\InventarioController;
 use App\Http\Controllers\MaterialRecibidoController;
@@ -11,9 +12,7 @@ use App\Http\Controllers\AsignacionController;
 use App\Http\Controllers\UsuarioController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', DashboardController::class)->name('dashboard');
 
 Route::resource('usuarios', UsuarioController::class);
 Route::resource('componentes', ComponentesController::class);

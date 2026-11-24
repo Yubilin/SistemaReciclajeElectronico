@@ -3,39 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', 'Usuarios')</title>
-    <style>
-        body { font-family: Arial, sans-serif; margin: 0; color: #222; }
-        nav { background: #f3f4f6; padding: 1rem 2rem; }
-        main { max-width: 960px; margin: 2rem auto; padding: 0 1rem; }
-        a { color: #166534; margin-right: .75rem; }
-        table { border-collapse: collapse; width: 100%; margin-top: 1rem; }
-        th, td { border: 1px solid #ddd; padding: .65rem; text-align: left; }
-        label { display: block; margin-top: 1rem; }
-        input { box-sizing: border-box; display: block; margin-top: .35rem; padding: .5rem; width: 100%; }
-        button { cursor: pointer; margin-top: 1rem; padding: .5rem .8rem; }
-        .success { background: #dcfce7; padding: .75rem; }
-        .error { color: #b91c1c; }
-        form.inline { display: inline; }
-    </style>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>@yield('title', 'Panel') · RAEE</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link href="{{ asset('css/raee-theme.css') }}" rel="stylesheet">
+    @stack('styles')
 </head>
 <body>
-    <nav>
-        <a href="{{ route('usuarios.index') }}">Usuarios</a>
-        <a href="{{ route('componentes.index') }}">Componentes</a>
-        <a href="{{ route('categorias.index') }}">Categorías</a>
-        <a href="{{ route('entregantes.index') }}">Entregantes</a>
-        <a href="{{ route('recepciones.index') }}">Recepciones</a>
-        <a href="{{ route('materiales-recibidos.index') }}">Materiales recibidos</a>
-        <a href="{{ route('recuperaciones.index') }}">Recuperaciones</a>
-        <a href="{{ route('inventarios.index') }}">Inventarios</a>
-        <a href="{{ route('asignaciones.index') }}">Asignaciones</a>
-    </nav>
-    <main>
-        @if (session('success'))
-            <p class="success">{{ session('success') }}</p>
-        @endif
-        @yield('content')
-    </main>
+    <div class="raee-shell">
+        @include('partials.sidebar')
+
+        <div class="raee-main">
+            <header class="raee-topbar">
+                <div class="raee-topbar-inner">
+                    <button class="btn btn-link text-white d-lg-none p-0 fs-3 lh-1" type="button"
+                            data-bs-toggle="offcanvas" data-bs-target="#raeeSidebar"
+                            aria-controls="raeeSidebar" aria-label="Abrir menú">
+                        <i class="bi bi-list" aria-hidden="true"></i>
+                    </button>
+                    <a href="{{ route('dashboard') }}" class="raee-topbar-brand d-lg-none">RAEE</a>
+                    <span class="raee-topbar-tagline d-none d-lg-inline">Gestión y trazabilidad de residuos electrónicos</span>
+
+                    <a href="{{ route('recepciones.create') }}" class="btn btn-sm btn-primary ms-auto">
+                        <i class="bi bi-plus-lg me-1" aria-hidden="true"></i>Nueva recepción
+                    </a>
+                </div>
+            </header>
+
+            <main class="raee-content">
+                @include('partials.alerts')
+                @yield('content')
+            </main>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    @stack('scripts')
 </body>
 </html>

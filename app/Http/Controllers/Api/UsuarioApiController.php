@@ -7,6 +7,7 @@ use App\Models\Usuario;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use App\Support\Catalogo;
 
 class UsuarioApiController extends Controller
 {
@@ -22,8 +23,8 @@ class UsuarioApiController extends Controller
             'apellido' => 'required|string|max:255',
             'correo' => 'required|email|unique:usuarios,correo',
             'contraseña' => 'required|string|min:8',
-            'rol' => 'required|string|max:255',
-            'estado' => 'required|string|max:255',
+            'rol' => ['required', Catalogo::regla('roles')],
+            'estado' => ['required', Catalogo::regla('estados.usuarios')],
         ]);
 
         $datos['contraseña'] = Hash::make($datos['contraseña']);
@@ -44,8 +45,8 @@ class UsuarioApiController extends Controller
             'apellido' => 'sometimes|string|max:255',
             'correo' => 'sometimes|email|unique:usuarios,correo,' . $usuario->id,
             'contraseña' => 'sometimes|string|min:8',
-            'rol' => 'sometimes|string|max:255',
-            'estado' => 'sometimes|string|max:255',
+            'rol' => ['sometimes', Catalogo::regla('roles')],
+            'estado' => ['sometimes', Catalogo::regla('estados.usuarios')],
         ]);
 
         if (isset($datos['contraseña'])) {

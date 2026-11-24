@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Recepcion;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use App\Support\Catalogo;
 
 class RecepcionApiController extends Controller
 {
@@ -21,7 +22,7 @@ class RecepcionApiController extends Controller
         $datos = $request->validate([
             'fecha' => 'required|date',
             'observaciones' => 'required|string|max:255',
-            'estado' => 'required|string|max:255',
+            'estado' => ['required', Catalogo::regla('estados.recepciones')],
             'usuario_id' => 'required|exists:usuarios,id',
             'entregante_id' => 'required|exists:entregantes,id',
         ]);
@@ -40,7 +41,7 @@ class RecepcionApiController extends Controller
         $datos = $request->validate([
             'fecha' => 'sometimes|date',
             'observaciones' => 'sometimes|string|max:255',
-            'estado' => 'sometimes|string|max:255',
+            'estado' => ['sometimes', Catalogo::regla('estados.recepciones')],
             'usuario_id' => 'sometimes|exists:usuarios,id',
             'entregante_id' => 'sometimes|exists:entregantes,id',
         ]);

@@ -7,6 +7,7 @@ use App\Models\recuperacion;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use App\Support\Catalogo;
 
 class ComponentesController extends Controller
 {
@@ -16,7 +17,7 @@ class ComponentesController extends Controller
             'nombre' => ['label' => 'Nombre', 'type' => 'text'],
             'descripcion' => ['label' => 'Descripción', 'type' => 'text'],
             'cantidad' => ['label' => 'Cantidad', 'type' => 'number'],
-            'estado' => ['label' => 'Estado', 'type' => 'text'],
+            'estado' => ['label' => 'Estado', 'type' => 'select', 'options' => Catalogo::opciones('estados.componentes')],
             'recuperacion_id' => [
                 'label' => 'Recuperación',
                 'type' => 'select',
@@ -54,7 +55,7 @@ class ComponentesController extends Controller
             'nombre' => ['required', 'string', 'max:255'],
             'descripcion' => ['required', 'string', 'max:255'],
             'cantidad' => ['required', 'integer', 'min:0'],
-            'estado' => ['required', 'string', 'max:255'],
+            'estado' => ['required', Catalogo::regla('estados.componentes')],
             'recuperacion_id' => ['required', 'integer', 'exists:recuperacions,id'],
         ]);
 
@@ -89,7 +90,7 @@ class ComponentesController extends Controller
             'nombre' => ['required', 'string', 'max:255'],
             'descripcion' => ['required', 'string', 'max:255'],
             'cantidad' => ['required', 'integer', 'min:0'],
-            'estado' => ['required', 'string', 'max:255'],
+            'estado' => ['required', Catalogo::regla('estados.componentes')],
             'recuperacion_id' => ['required', 'integer', 'exists:recuperacions,id'],
         ]);
 

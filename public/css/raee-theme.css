@@ -1,0 +1,555 @@
+/* ==========================================================================
+   RAEE · Tema "Tech Eco Limpia"
+   Sobrescribe las variables de Bootstrap 5.3 y define los componentes propios.
+   Cargar DESPUÉS de bootstrap.min.css.
+   ========================================================================== */
+
+:root,
+[data-bs-theme="light"] {
+    /* --- Paleta del proyecto ------------------------------------------- */
+    --raee-primary: #0F766E;
+    --raee-primary-hover: #115E59;
+    --raee-primary-active: #134E4A;
+    --raee-slate: #0F172A;
+    --raee-cyan: #0284C7;
+    --raee-lime: #65A30D;
+    --raee-amber: #D97706;
+    --raee-bg: #F8FAFC;
+    --raee-surface: #FFFFFF;
+    --raee-border: #E2E8F0;
+    --raee-text: #1E293B;
+    --raee-muted: #64748B;
+    --raee-sidebar-width: 264px;
+
+    /* --- Variables de Bootstrap ---------------------------------------- */
+    --bs-primary: #0F766E;
+    --bs-primary-rgb: 15, 118, 110;
+    --bs-primary-text-emphasis: #134E4A;
+    --bs-primary-bg-subtle: #CCFBF1;
+    --bs-primary-border-subtle: #99F6E4;
+
+    --bs-success: #65A30D;
+    --bs-success-rgb: 101, 163, 13;
+    --bs-success-text-emphasis: #3F6212;
+    --bs-success-bg-subtle: #ECFCCB;
+    --bs-success-border-subtle: #D9F99D;
+
+    --bs-warning: #D97706;
+    --bs-warning-rgb: 217, 119, 6;
+    --bs-warning-text-emphasis: #92400E;
+    --bs-warning-bg-subtle: #FEF3C7;
+    --bs-warning-border-subtle: #FDE68A;
+
+    --bs-info: #0284C7;
+    --bs-info-rgb: 2, 132, 199;
+    --bs-info-text-emphasis: #075985;
+    --bs-info-bg-subtle: #E0F2FE;
+    --bs-info-border-subtle: #BAE6FD;
+
+    --bs-body-bg: #F8FAFC;
+    --bs-body-bg-rgb: 248, 250, 252;
+    --bs-body-color: #1E293B;
+    --bs-body-color-rgb: 30, 41, 59;
+    --bs-secondary-color: #64748B;
+    --bs-secondary-color-rgb: 100, 116, 139;
+    --bs-border-color: #E2E8F0;
+    --bs-border-radius: .5rem;
+    --bs-border-radius-lg: .75rem;
+
+    --bs-link-color: #0F766E;
+    --bs-link-color-rgb: 15, 118, 110;
+    --bs-link-hover-color: #115E59;
+    --bs-link-hover-color-rgb: 17, 94, 89;
+    --bs-focus-ring-color: rgba(15, 118, 110, .25);
+}
+
+body {
+    background-color: var(--raee-bg);
+    color: var(--raee-text);
+    font-size: .9375rem;
+}
+
+/* ==========================================================================
+   Botones
+   ========================================================================== */
+.btn-primary {
+    --bs-btn-color: #fff;
+    --bs-btn-bg: #0F766E;
+    --bs-btn-border-color: #0F766E;
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: #115E59;
+    --bs-btn-hover-border-color: #115E59;
+    --bs-btn-focus-shadow-rgb: 15, 118, 110;
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-bg: #134E4A;
+    --bs-btn-active-border-color: #134E4A;
+    --bs-btn-disabled-color: #fff;
+    --bs-btn-disabled-bg: #0F766E;
+    --bs-btn-disabled-border-color: #0F766E;
+}
+
+.btn-outline-primary {
+    --bs-btn-color: #0F766E;
+    --bs-btn-border-color: #0F766E;
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: #0F766E;
+    --bs-btn-hover-border-color: #0F766E;
+    --bs-btn-focus-shadow-rgb: 15, 118, 110;
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-bg: #115E59;
+    --bs-btn-active-border-color: #115E59;
+    --bs-btn-disabled-color: #0F766E;
+    --bs-btn-disabled-border-color: #0F766E;
+}
+
+.btn-outline-secondary {
+    --bs-btn-color: #475569;
+    --bs-btn-border-color: #CBD5E1;
+    --bs-btn-hover-color: #1E293B;
+    --bs-btn-hover-bg: #F1F5F9;
+    --bs-btn-hover-border-color: #CBD5E1;
+    --bs-btn-active-color: #1E293B;
+    --bs-btn-active-bg: #E2E8F0;
+    --bs-btn-active-border-color: #CBD5E1;
+}
+
+/* ==========================================================================
+   Formularios
+   ========================================================================== */
+.form-label {
+    font-weight: 500;
+    font-size: .875rem;
+    margin-bottom: .375rem;
+}
+
+.form-control,
+.form-select {
+    border-color: #CBD5E1;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: #0F766E;
+    box-shadow: 0 0 0 .25rem rgba(15, 118, 110, .18);
+}
+
+.form-control.is-invalid:focus,
+.form-select.is-invalid:focus {
+    box-shadow: 0 0 0 .25rem rgba(var(--bs-danger-rgb), .2);
+}
+
+/* ==========================================================================
+   Tarjetas, tablas y paginación
+   ========================================================================== */
+.card {
+    --bs-card-bg: #FFFFFF;
+    --bs-card-border-color: #E2E8F0;
+    --bs-card-border-radius: .75rem;
+    --bs-card-inner-border-radius: calc(.75rem - 1px);
+    --bs-card-cap-bg: #FFFFFF;
+    box-shadow: 0 1px 2px rgba(15, 23, 42, .04);
+}
+
+.card-header,
+.card-footer {
+    background-color: #FFFFFF;
+}
+
+.table-raee {
+    --bs-table-bg: transparent;
+    --bs-table-hover-bg: #F1F5F9;
+    --bs-table-border-color: #E2E8F0;
+    color: var(--raee-text);
+}
+
+.table-raee thead th {
+    background-color: #F8FAFC;
+    color: var(--raee-muted);
+    font-size: .75rem;
+    font-weight: 600;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    border-bottom: 1px solid #E2E8F0;
+    padding-top: .75rem;
+    padding-bottom: .75rem;
+}
+
+.table-raee tbody td {
+    padding-top: .75rem;
+    padding-bottom: .75rem;
+}
+
+.table-raee .raee-id {
+    color: var(--raee-muted);
+    font-variant-numeric: tabular-nums;
+}
+
+.raee-truncate {
+    display: inline-block;
+    max-width: 240px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    vertical-align: bottom;
+}
+
+.pagination {
+    --bs-pagination-color: #0F766E;
+    --bs-pagination-hover-color: #115E59;
+    --bs-pagination-hover-bg: #F1F5F9;
+    --bs-pagination-focus-color: #115E59;
+    --bs-pagination-focus-bg: #F1F5F9;
+    --bs-pagination-focus-box-shadow: 0 0 0 .25rem rgba(15, 118, 110, .18);
+    --bs-pagination-active-bg: #0F766E;
+    --bs-pagination-active-border-color: #0F766E;
+    --bs-pagination-border-color: #E2E8F0;
+    margin-bottom: 0;
+}
+
+/* ==========================================================================
+   Estructura: sidebar + topbar + contenido
+   ========================================================================== */
+.raee-shell {
+    display: flex;
+    min-height: 100vh;
+}
+
+.raee-main {
+    flex: 1 1 0;
+    min-width: 0; /* permite que .table-responsive haga scroll dentro del flex */
+    display: flex;
+    flex-direction: column;
+}
+
+.raee-content {
+    width: 100%;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 1.5rem 1rem 3rem;
+}
+
+@media (min-width: 992px) {
+    .raee-content {
+        padding: 2rem 2rem 3rem;
+    }
+}
+
+/* El contenedor fijo del sidebar solo ocupa espacio en escritorio;
+   en móvil el sidebar es un offcanvas. */
+@media (min-width: 992px) {
+    .raee-sidebar-wrap {
+        flex: 0 0 var(--raee-sidebar-width);
+        width: var(--raee-sidebar-width);
+        background-color: var(--raee-slate);
+        position: sticky;
+        top: 0;
+        height: 100vh;
+        overflow-y: auto;
+    }
+}
+
+.raee-sidebar {
+    --bs-offcanvas-width: 272px;
+    --bs-offcanvas-bg: var(--raee-slate);
+    --bs-offcanvas-color: #CBD5E1;
+    --bs-offcanvas-border-width: 0;
+}
+
+.raee-sidebar .offcanvas-body {
+    padding: 0;
+}
+
+.raee-sidebar-inner {
+    width: 100%;
+    padding: 1.25rem 1rem 2rem;
+}
+
+.raee-brand {
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+    margin-bottom: 1.5rem;
+    padding: 0 .5rem;
+    color: #fff;
+    text-decoration: none;
+}
+
+.raee-brand:hover {
+    color: #fff;
+}
+
+.raee-brand__logo {
+    display: grid;
+    place-items: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: .625rem;
+    background-color: var(--raee-primary);
+    color: #fff;
+    font-size: 1.2rem;
+}
+
+.raee-brand__name {
+    display: block;
+    font-weight: 700;
+    font-size: 1.05rem;
+    letter-spacing: .02em;
+    line-height: 1.1;
+}
+
+.raee-brand__tag {
+    display: block;
+    font-size: .72rem;
+    color: #94A3B8;
+}
+
+.raee-nav-label {
+    margin: 0 0 .35rem;
+    padding: 0 .75rem;
+    font-size: .6875rem;
+    font-weight: 600;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: #94A3B8;
+}
+
+.raee-nav-link {
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+    padding: .55rem .75rem;
+    border-radius: .5rem;
+    color: #CBD5E1;
+    font-size: .9rem;
+    text-decoration: none;
+    transition: background-color .15s ease, color .15s ease;
+}
+
+.raee-nav-link i {
+    font-size: 1.05rem;
+    color: #94A3B8;
+    transition: color .15s ease;
+}
+
+.raee-nav-link:hover {
+    background-color: rgba(255, 255, 255, .06);
+    color: #fff;
+}
+
+.raee-nav-link:hover i {
+    color: #fff;
+}
+
+.raee-nav-link.active {
+    background-color: rgba(2, 132, 199, .18);
+    color: #fff;
+    font-weight: 500;
+    box-shadow: inset 3px 0 0 var(--raee-cyan);
+}
+
+.raee-nav-link.active i {
+    color: #38BDF8;
+}
+
+.raee-topbar {
+    position: sticky;
+    top: 0;
+    z-index: 1020;
+    background-color: var(--raee-slate);
+    color: #E2E8F0;
+    border-bottom: 1px solid rgba(255, 255, 255, .08);
+}
+
+.raee-topbar-inner {
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+    height: 56px;
+    padding: 0 1rem;
+}
+
+@media (min-width: 992px) {
+    .raee-topbar-inner {
+        padding: 0 2rem;
+    }
+}
+
+.raee-topbar-brand {
+    color: #fff;
+    font-weight: 700;
+    letter-spacing: .02em;
+    text-decoration: none;
+}
+
+.raee-topbar-brand:hover {
+    color: #fff;
+}
+
+.raee-topbar-tagline {
+    font-size: .85rem;
+    color: #94A3B8;
+}
+
+/* ==========================================================================
+   Encabezado de página, estado vacío, avatar
+   ========================================================================== */
+.raee-page-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.raee-page-title {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: -.01em;
+}
+
+.raee-page-subtitle {
+    margin: .25rem 0 0;
+    color: var(--raee-muted);
+    font-size: .9rem;
+}
+
+.raee-empty {
+    padding: 3.5rem 1rem;
+    text-align: center;
+    color: var(--raee-muted);
+}
+
+.raee-empty i {
+    display: block;
+    margin-bottom: .5rem;
+    font-size: 2.5rem;
+    color: #94A3B8;
+}
+
+.raee-avatar {
+    display: inline-grid;
+    place-items: center;
+    flex: 0 0 auto;
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: 50%;
+    background-color: rgba(15, 118, 110, .12);
+    color: var(--raee-primary);
+    font-size: .85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.raee-avatar--lg {
+    width: 3.5rem;
+    height: 3.5rem;
+    font-size: 1.25rem;
+}
+
+/* Lista de detalle (vistas show) */
+.raee-dl-row {
+    padding: .85rem 0;
+    border-bottom: 1px solid var(--raee-border);
+}
+
+.raee-dl-row:last-child {
+    border-bottom: 0;
+}
+
+.raee-dl-row dt {
+    color: var(--raee-muted);
+    font-size: .85rem;
+    font-weight: 500;
+}
+
+.raee-dl-row dd {
+    margin-bottom: 0;
+}
+
+/* ==========================================================================
+   Tarjetas KPI
+   ========================================================================== */
+.raee-kpi {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+    height: 100%;
+    padding: 1.1rem 1.25rem;
+    color: inherit;
+    text-decoration: none;
+    transition: border-color .15s ease, box-shadow .15s ease;
+}
+
+a.raee-kpi:hover {
+    color: inherit;
+    border-color: #CBD5E1;
+    box-shadow: 0 4px 12px rgba(15, 23, 42, .07);
+}
+
+.raee-kpi__icon {
+    display: grid;
+    place-items: center;
+    flex: 0 0 3rem;
+    width: 3rem;
+    height: 3rem;
+    border-radius: .75rem;
+    font-size: 1.4rem;
+}
+
+.raee-kpi__icon--primary { background-color: rgba(15, 118, 110, .10); color: #0F766E; }
+.raee-kpi__icon--cyan    { background-color: rgba(2, 132, 199, .10);  color: #0284C7; }
+.raee-kpi__icon--lime    { background-color: rgba(101, 163, 13, .14); color: #4D7C0F; }
+.raee-kpi__icon--amber   { background-color: rgba(217, 119, 6, .14);  color: #B45309; }
+
+.raee-kpi__label {
+    color: var(--raee-muted);
+    font-size: .8rem;
+    font-weight: 500;
+}
+
+.raee-kpi__value {
+    font-size: 1.75rem;
+    font-weight: 600;
+    line-height: 1.15;
+    font-variant-numeric: tabular-nums;
+}
+
+/* ==========================================================================
+   Badges de estado
+   ========================================================================== */
+.raee-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: .4rem;
+    padding: .28rem .65rem;
+    border: 1px solid transparent;
+    border-radius: 999px;
+    font-size: .75rem;
+    font-weight: 600;
+    line-height: 1.2;
+    white-space: nowrap;
+}
+
+.raee-badge::before {
+    content: "";
+    width: .4rem;
+    height: .4rem;
+    border-radius: 50%;
+    background-color: currentColor;
+}
+
+.raee-badge--ok     { background-color: #ECFCCB; color: #3F6212; border-color: #D9F99D; }
+.raee-badge--ok::before { background-color: var(--raee-lime); }
+
+.raee-badge--warn   { background-color: #FEF3C7; color: #92400E; border-color: #FDE68A; }
+.raee-badge--warn::before { background-color: var(--raee-amber); }
+
+.raee-badge--info   { background-color: #E0F2FE; color: #075985; border-color: #BAE6FD; }
+.raee-badge--info::before { background-color: var(--raee-cyan); }
+
+.raee-badge--danger { background-color: #FEE2E2; color: #991B1B; border-color: #FECACA; }
+.raee-badge--muted  { background-color: #F1F5F9; color: #475569; border-color: #E2E8F0; }

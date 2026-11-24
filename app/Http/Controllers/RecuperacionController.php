@@ -7,6 +7,7 @@ use App\Models\recuperacion;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use App\Support\Catalogo;
 
 class RecuperacionController extends Controller
 {
@@ -15,7 +16,7 @@ class RecuperacionController extends Controller
         return [
             'fecha' => ['label' => 'Fecha', 'type' => 'date'],
             'observaciones' => ['label' => 'Observaciones', 'type' => 'text'],
-            'resultado' => ['label' => 'Resultado', 'type' => 'text'],
+            'resultado' => ['label' => 'Resultado', 'type' => 'select', 'options' => Catalogo::opciones('resultados')],
             'material_recibido_id' => [
                 'label' => 'Material recibido',
                 'type' => 'select',
@@ -52,7 +53,7 @@ class RecuperacionController extends Controller
         $datos = $request->validate([
             'fecha' => ['required', 'date'],
             'observaciones' => ['required', 'string', 'max:255'],
-            'resultado' => ['required', 'string', 'max:255'],
+            'resultado' => ['required', Catalogo::regla('resultados')],
             'material_recibido_id' => ['required', 'integer', 'exists:material_recibidos,id'],
         ]);
 
@@ -86,7 +87,7 @@ class RecuperacionController extends Controller
         $datos = $request->validate([
             'fecha' => ['required', 'date'],
             'observaciones' => ['required', 'string', 'max:255'],
-            'resultado' => ['required', 'string', 'max:255'],
+            'resultado' => ['required', Catalogo::regla('resultados')],
             'material_recibido_id' => ['required', 'integer', 'exists:material_recibidos,id'],
         ]);
 
