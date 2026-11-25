@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\materialRecibido;
-use App\Models\recuperacion;
+use App\Models\MaterialRecibido;
+use App\Models\Recuperacion;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -19,7 +19,7 @@ class RecuperacionController extends Controller
             'material_recibido_id' => [
                 'label' => 'Material recibido',
                 'type' => 'select',
-                'options' => materialRecibido::query()->orderBy('nombre')->pluck('nombre', 'id'),
+                'options' => MaterialRecibido::query()->orderBy('nombre')->pluck('nombre', 'id'),
                 'relation' => 'materialRecibido.nombre',
             ],
         ];
@@ -27,7 +27,7 @@ class RecuperacionController extends Controller
 
     public function index(): View
     {
-        $registros = recuperacion::query()->with('materialRecibido')->orderBy('id')->paginate(10);
+        $registros = Recuperacion::query()->with('materialRecibido')->orderBy('id')->paginate(10);
 
         return view('recursos.index', [
             'registros' => $registros,
@@ -56,12 +56,12 @@ class RecuperacionController extends Controller
             'material_recibido_id' => ['required', 'integer', 'exists:material_recibidos,id'],
         ]);
 
-        recuperacion::create($datos);
+        Recuperacion::create($datos);
 
         return redirect()->route('recuperaciones.index')->with('success', 'Recuperación creada correctamente.');
     }
 
-    public function show(recuperacion $recuperacion): View
+    public function show(Recuperacion $recuperacion): View
     {
         return view('recursos.show', [
             'titulo' => 'Detalle de la recuperación',
@@ -71,7 +71,7 @@ class RecuperacionController extends Controller
         ]);
     }
 
-    public function edit(recuperacion $recuperacion): View
+    public function edit(Recuperacion $recuperacion): View
     {
         return view('recursos.form', [
             'titulo' => 'Editar recuperación',
@@ -81,7 +81,7 @@ class RecuperacionController extends Controller
         ]);
     }
 
-    public function update(Request $request, recuperacion $recuperacion): RedirectResponse
+    public function update(Request $request, Recuperacion $recuperacion): RedirectResponse
     {
         $datos = $request->validate([
             'fecha' => ['required', 'date'],
@@ -95,7 +95,7 @@ class RecuperacionController extends Controller
         return redirect()->route('recuperaciones.index')->with('success', 'Recuperación actualizada correctamente.');
     }
 
-    public function destroy(recuperacion $recuperacion): RedirectResponse
+    public function destroy(Recuperacion $recuperacion): RedirectResponse
     {
         $recuperacion->delete();
 

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\materialRecibido;
+use App\Models\MaterialRecibido;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -12,7 +12,7 @@ class MaterialRecibidoApiController extends Controller
     public function index(): JsonResponse
     {
         return response()->json(
-            materialRecibido::with(['categoria', 'recepcion'])->paginate(10)
+            MaterialRecibido::with(['categoria', 'recepcion'])->paginate(10)
         );
     }
 
@@ -29,18 +29,18 @@ class MaterialRecibidoApiController extends Controller
             'recepcion_id' => 'required|exists:recepcions,id',
         ]);
 
-        $material = materialRecibido::create($datos);
+        $material = MaterialRecibido::create($datos);
         return response()->json($material->load(['categoria', 'recepcion']), 201);
     }
 
-    public function show(materialRecibido $materialRecibido): JsonResponse
+    public function show(MaterialRecibido $materialRecibido): JsonResponse
     {
         return response()->json(
             $materialRecibido->load(['categoria', 'recepcion', 'recuperaciones', 'asignaciones'])
         );
     }
 
-    public function update(Request $request, materialRecibido $materialRecibido): JsonResponse
+    public function update(Request $request, MaterialRecibido $materialRecibido): JsonResponse
     {
         $datos = $request->validate([
             'nombre' => 'sometimes|string|max:255',
@@ -57,7 +57,7 @@ class MaterialRecibidoApiController extends Controller
         return response()->json($materialRecibido->load(['categoria', 'recepcion']));
     }
 
-    public function destroy(materialRecibido $materialRecibido): JsonResponse
+    public function destroy(MaterialRecibido $materialRecibido): JsonResponse
     {
         $materialRecibido->delete();
         return response()->json(null, 204);

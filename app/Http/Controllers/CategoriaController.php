@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\categoria;
+use App\Models\Categoria;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -16,7 +16,7 @@ class CategoriaController extends Controller
 
     public function index(): View
     {
-        $registros = categoria::query()->orderBy('id')->paginate(10);
+        $registros = Categoria::query()->orderBy('id')->paginate(10);
 
         return view('recursos.index', [
             'registros' => $registros,
@@ -43,12 +43,12 @@ class CategoriaController extends Controller
             'descripcion' => ['required', 'string', 'max:255'],
         ]);
 
-        categoria::create($datos);
+        Categoria::create($datos);
 
         return redirect()->route('categorias.index')->with('success', 'Categoría creada correctamente.');
     }
 
-    public function show(categoria $categoria): View
+    public function show(Categoria $categoria): View
     {
         return view('recursos.show', [
             'titulo' => 'Detalle de la categoría',
@@ -58,7 +58,7 @@ class CategoriaController extends Controller
         ]);
     }
 
-    public function edit(categoria $categoria): View
+    public function edit(Categoria $categoria): View
     {
         return view('recursos.form', [
             'titulo' => 'Editar categoría',
@@ -68,7 +68,7 @@ class CategoriaController extends Controller
         ]);
     }
 
-    public function update(Request $request, categoria $categoria): RedirectResponse
+    public function update(Request $request, Categoria $categoria): RedirectResponse
     {
         $datos = $request->validate([
             'nombre' => ['required', 'string', 'max:255'],
@@ -80,7 +80,7 @@ class CategoriaController extends Controller
         return redirect()->route('categorias.index')->with('success', 'Categoría actualizada correctamente.');
     }
 
-    public function destroy(categoria $categoria): RedirectResponse
+    public function destroy(Categoria $categoria): RedirectResponse
     {
         $categoria->delete();
 

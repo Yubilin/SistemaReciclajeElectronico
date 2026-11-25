@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\recuperacion;
+use App\Models\Recuperacion;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -12,7 +12,7 @@ class RecuperacionApiController extends Controller
     public function index(): JsonResponse
     {
         return response()->json(
-            recuperacion::with(['materialRecibido', 'componentes'])->paginate(10)
+            Recuperacion::with(['materialRecibido', 'componentes'])->paginate(10)
         );
     }
 
@@ -25,16 +25,16 @@ class RecuperacionApiController extends Controller
             'material_recibido_id' => 'required|exists:material_recibidos,id',
         ]);
 
-        $recuperacion = recuperacion::create($datos);
+        $recuperacion = Recuperacion::create($datos);
         return response()->json($recuperacion->load('materialRecibido'), 201);
     }
 
-    public function show(recuperacion $recuperacion): JsonResponse
+    public function show(Recuperacion $recuperacion): JsonResponse
     {
         return response()->json($recuperacion->load(['materialRecibido', 'componentes']));
     }
 
-    public function update(Request $request, recuperacion $recuperacion): JsonResponse
+    public function update(Request $request, Recuperacion $recuperacion): JsonResponse
     {
         $datos = $request->validate([
             'fecha' => 'sometimes|date',
@@ -47,7 +47,7 @@ class RecuperacionApiController extends Controller
         return response()->json($recuperacion->load('materialRecibido'));
     }
 
-    public function destroy(recuperacion $recuperacion): JsonResponse
+    public function destroy(Recuperacion $recuperacion): JsonResponse
     {
         $recuperacion->delete();
         return response()->json(null, 204);

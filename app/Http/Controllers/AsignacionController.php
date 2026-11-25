@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\asignacion;
-use App\Models\materialRecibido;
+use App\Models\Asignacion;
+use App\Models\MaterialRecibido;
 use App\Models\Usuario;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -29,7 +29,7 @@ class AsignacionController extends Controller
             'material_recibido_id' => [
                 'label' => 'Material recibido',
                 'type' => 'select',
-                'options' => materialRecibido::query()->orderBy('nombre')->pluck('nombre', 'id'),
+                'options' => MaterialRecibido::query()->orderBy('nombre')->pluck('nombre', 'id'),
                 'relation' => 'materialRecibido.nombre',
             ],
         ];
@@ -37,7 +37,7 @@ class AsignacionController extends Controller
 
     public function index(): View
     {
-        $registros = asignacion::query()->with(['usuario', 'materialRecibido'])->orderBy('id')->paginate(10);
+        $registros = Asignacion::query()->with(['usuario', 'materialRecibido'])->orderBy('id')->paginate(10);
 
         return view('recursos.index', [
             'registros' => $registros,
@@ -70,12 +70,12 @@ class AsignacionController extends Controller
             'material_recibido_id' => ['required', 'integer', 'exists:material_recibidos,id'],
         ]);
 
-        asignacion::create($datos);
+        Asignacion::create($datos);
 
         return redirect()->route('asignaciones.index')->with('success', 'Asignación creada correctamente.');
     }
 
-    public function show(asignacion $asignacion): View
+    public function show(Asignacion $asignacion): View
     {
         return view('recursos.show', [
             'titulo' => 'Detalle de la asignación',
@@ -85,7 +85,7 @@ class AsignacionController extends Controller
         ]);
     }
 
-    public function edit(asignacion $asignacion): View
+    public function edit(Asignacion $asignacion): View
     {
         return view('recursos.form', [
             'titulo' => 'Editar asignación',
@@ -95,7 +95,7 @@ class AsignacionController extends Controller
         ]);
     }
 
-    public function update(Request $request, asignacion $asignacion): RedirectResponse
+    public function update(Request $request, Asignacion $asignacion): RedirectResponse
     {
         $datos = $request->validate([
             'numeroTurno' => ['required', 'integer', 'min:0'],
@@ -113,7 +113,7 @@ class AsignacionController extends Controller
         return redirect()->route('asignaciones.index')->with('success', 'Asignación actualizada correctamente.');
     }
 
-    public function destroy(asignacion $asignacion): RedirectResponse
+    public function destroy(Asignacion $asignacion): RedirectResponse
     {
         $asignacion->delete();
 

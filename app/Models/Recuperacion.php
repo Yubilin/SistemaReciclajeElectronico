@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class recuperacion extends Model
+class Recuperacion extends Model
 {
     protected $table = 'recuperacions';
 
@@ -19,7 +19,7 @@ class recuperacion extends Model
 
     public function materialRecibido(): BelongsTo
     {
-        return $this->belongsTo(materialRecibido::class, 'material_recibido_id');
+        return $this->belongsTo(MaterialRecibido::class, 'material_recibido_id');
     }
 
     public function componentes(): HasMany

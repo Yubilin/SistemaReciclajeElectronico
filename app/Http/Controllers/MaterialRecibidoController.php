@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\categoria;
-use App\Models\materialRecibido;
+use App\Models\Categoria;
+use App\Models\MaterialRecibido;
 use App\Models\Recepcion;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -23,7 +23,7 @@ class MaterialRecibidoController extends Controller
             'categoria_id' => [
                 'label' => 'Categoría',
                 'type' => 'select',
-                'options' => categoria::query()->orderBy('nombre')->pluck('nombre', 'id'),
+                'options' => Categoria::query()->orderBy('nombre')->pluck('nombre', 'id'),
                 'relation' => 'categoria.nombre',
             ],
             'recepcion_id' => [
@@ -37,7 +37,7 @@ class MaterialRecibidoController extends Controller
 
     public function index(): View
     {
-        $registros = materialRecibido::query()->with(['categoria', 'recepcion'])->orderBy('id')->paginate(10);
+        $registros = MaterialRecibido::query()->with(['categoria', 'recepcion'])->orderBy('id')->paginate(10);
 
         return view('recursos.index', [
             'registros' => $registros,
@@ -70,12 +70,12 @@ class MaterialRecibidoController extends Controller
             'recepcion_id' => ['required', 'integer', 'exists:recepcions,id'],
         ]);
 
-        materialRecibido::create($datos);
+        MaterialRecibido::create($datos);
 
         return redirect()->route('materiales-recibidos.index')->with('success', 'Material recibido creado correctamente.');
     }
 
-    public function show(materialRecibido $materialRecibido): View
+    public function show(MaterialRecibido $materialRecibido): View
     {
         return view('recursos.show', [
             'titulo' => 'Detalle del material recibido',
@@ -85,7 +85,7 @@ class MaterialRecibidoController extends Controller
         ]);
     }
 
-    public function edit(materialRecibido $materialRecibido): View
+    public function edit(MaterialRecibido $materialRecibido): View
     {
         return view('recursos.form', [
             'titulo' => 'Editar material recibido',
@@ -95,7 +95,7 @@ class MaterialRecibidoController extends Controller
         ]);
     }
 
-    public function update(Request $request, materialRecibido $materialRecibido): RedirectResponse
+    public function update(Request $request, MaterialRecibido $materialRecibido): RedirectResponse
     {
         $datos = $request->validate([
             'nombre' => ['required', 'string', 'max:255'],
@@ -113,7 +113,7 @@ class MaterialRecibidoController extends Controller
         return redirect()->route('materiales-recibidos.index')->with('success', 'Material recibido actualizado correctamente.');
     }
 
-    public function destroy(materialRecibido $materialRecibido): RedirectResponse
+    public function destroy(MaterialRecibido $materialRecibido): RedirectResponse
     {
         $materialRecibido->delete();
 

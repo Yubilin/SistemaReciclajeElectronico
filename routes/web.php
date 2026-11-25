@@ -11,8 +11,23 @@ use App\Http\Controllers\AsignacionController;
 use App\Http\Controllers\UsuarioController;
 use Illuminate\Support\Facades\Route;
 
+use App\Models\Usuario;
+use App\Models\Entregante;
+use App\Models\Categoria;
+use App\Models\Recepcion;
+use App\Models\MaterialRecibido;
+
 Route::get('/', function () {
-    return view('welcome');
+    return view('welcome', [
+        'usuarios' => Usuario::count(),
+        'entregantes' => Entregante::count(),
+        'categorias' => Categoria::count(),
+        'recepciones' => Recepcion::count(),
+        'materiales' => MaterialRecibido::count(),
+        'categoriasLista' => Categoria::latest()->take(5)->get(),
+        'entregantesLista' => Entregante::latest()->take(5)->get(),
+        'recepcionesLista' => Recepcion::with('entregante')->latest()->take(5)->get(),
+    ]);
 });
 
 Route::resource('usuarios', UsuarioController::class);

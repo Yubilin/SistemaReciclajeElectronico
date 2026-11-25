@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\categoria;
+use App\Models\Categoria;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -11,7 +11,7 @@ class CategoriaApiController extends Controller
 {
     public function index(): JsonResponse
     {
-        return response()->json(categoria::paginate(10));
+        return response()->json(Categoria::paginate(10));
     }
 
     public function store(Request $request): JsonResponse
@@ -21,16 +21,16 @@ class CategoriaApiController extends Controller
             'descripcion' => 'required|string|max:255',
         ]);
 
-        $categoria = categoria::create($datos);
+        $categoria = Categoria::create($datos);
         return response()->json($categoria, 201);
     }
 
-    public function show(categoria $categoria): JsonResponse
+    public function show(Categoria $categoria): JsonResponse
     {
         return response()->json($categoria->load('materialesRecibidos'));
     }
 
-    public function update(Request $request, categoria $categoria): JsonResponse
+    public function update(Request $request, Categoria $categoria): JsonResponse
     {
         $datos = $request->validate([
             'nombre' => 'sometimes|string|max:255',
@@ -41,7 +41,7 @@ class CategoriaApiController extends Controller
         return response()->json($categoria);
     }
 
-    public function destroy(categoria $categoria): JsonResponse
+    public function destroy(Categoria $categoria): JsonResponse
     {
         $categoria->delete();
         return response()->json(null, 204);

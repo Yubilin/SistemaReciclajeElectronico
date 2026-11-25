@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class asignacion extends Model
+class Asignacion extends Model
 {
     protected $table = 'asignacions';
 
@@ -27,6 +27,6 @@ class asignacion extends Model
 
     public function materialRecibido(): BelongsTo
     {
-        return $this->belongsTo(materialRecibido::class, 'material_recibido_id');
+        return $this->belongsTo(MaterialRecibido::class, 'material_recibido_id');
     }
 }

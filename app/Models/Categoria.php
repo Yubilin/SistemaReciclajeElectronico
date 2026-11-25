@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class categoria extends Model
+class Categoria extends Model
 {
     protected $table = 'categorias';
 
@@ -16,6 +16,6 @@ class categoria extends Model
 
     public function materialesRecibidos(): HasMany
     {
-        return $this->hasMany(materialRecibido::class, 'categoria_id');
+        return $this->hasMany(MaterialRecibido::class, 'categoria_id');
     }
 }

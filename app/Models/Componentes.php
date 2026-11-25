@@ -20,7 +20,7 @@ class Componentes extends Model
 
     public function recuperacion(): BelongsTo
     {
-        return $this->belongsTo(recuperacion::class, 'recuperacion_id');
+        return $this->belongsTo(Recuperacion::class, 'recuperacion_id');
     }
 
     public function inventario(): HasOne

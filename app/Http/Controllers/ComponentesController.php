@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Componentes;
-use App\Models\recuperacion;
+use App\Models\Recuperacion;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -20,7 +20,7 @@ class ComponentesController extends Controller
             'recuperacion_id' => [
                 'label' => 'Recuperación',
                 'type' => 'select',
-                'options' => recuperacion::query()->orderByDesc('fecha')->pluck('fecha', 'id'),
+                'options' => Recuperacion::query()->orderByDesc('fecha')->pluck('fecha', 'id'),
                 'relation' => 'recuperacion.fecha',
             ],
         ];

@@ -25,6 +25,6 @@ class Usuario extends Model
 
     public function asignaciones(): HasMany
     {
-        return $this->hasMany(asignacion::class, 'usuario_id');
+        return $this->hasMany(Asignacion::class, 'usuario_id');
     }
 }

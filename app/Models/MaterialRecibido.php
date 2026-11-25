@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class materialRecibido extends Model
+class MaterialRecibido extends Model
 {
     protected $table = 'material_recibidos';
 
@@ -28,16 +28,16 @@ class materialRecibido extends Model
 
     public function categoria(): BelongsTo
     {
-        return $this->belongsTo(categoria::class, 'categoria_id');
+        return $this->belongsTo(Categoria::class, 'categoria_id');
     }
 
     public function recuperaciones(): HasMany
     {
-        return $this->hasMany(recuperacion::class, 'material_recibido_id');
+        return $this->hasMany(Recuperacion::class, 'material_recibido_id');
     }
 
     public function asignaciones(): HasMany
     {
-        return $this->hasMany(asignacion::class, 'material_recibido_id');
+        return $this->hasMany(Asignacion::class, 'material_recibido_id');
     }
 }

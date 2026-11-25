@@ -30,6 +30,6 @@ class Recepcion extends Model
 
     public function materialesRecibidos(): HasMany
     {
-        return $this->hasMany(materialRecibido::class, 'recepcion_id');
+        return $this->hasMany(MaterialRecibido::class, 'recepcion_id');
     }
 }

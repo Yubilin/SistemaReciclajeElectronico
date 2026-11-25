@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\asignacion;
+use App\Models\Asignacion;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -12,7 +12,7 @@ class AsignacionApiController extends Controller
     public function index(): JsonResponse
     {
         return response()->json(
-            asignacion::with(['usuario', 'materialRecibido'])->paginate(10)
+            Asignacion::with(['usuario', 'materialRecibido'])->paginate(10)
         );
     }
 
@@ -29,16 +29,16 @@ class AsignacionApiController extends Controller
             'material_recibido_id' => 'required|exists:material_recibidos,id',
         ]);
 
-        $asignacion = asignacion::create($datos);
+        $asignacion = Asignacion::create($datos);
         return response()->json($asignacion->load(['usuario', 'materialRecibido']), 201);
     }
 
-    public function show(asignacion $asignacion): JsonResponse
+    public function show(Asignacion $asignacion): JsonResponse
     {
         return response()->json($asignacion->load(['usuario', 'materialRecibido']));
     }
 
-    public function update(Request $request, asignacion $asignacion): JsonResponse
+    public function update(Request $request, Asignacion $asignacion): JsonResponse
     {
         $datos = $request->validate([
             'numeroTurno' => 'sometimes|integer|min:0',
@@ -55,7 +55,7 @@ class AsignacionApiController extends Controller
         return response()->json($asignacion->load(['usuario', 'materialRecibido']));
     }
 
-    public function destroy(asignacion $asignacion): JsonResponse
+    public function destroy(Asignacion $asignacion): JsonResponse
     {
         $asignacion->delete();
         return response()->json(null, 204);
