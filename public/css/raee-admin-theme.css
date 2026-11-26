@@ -1,0 +1,155 @@
+.fi-body.fi-panel-admin {
+    background-color: #f4f8f6;
+}
+
+.fi-panel-admin .fi-topbar {
+    background-color: #f4f8f6;
+    border-bottom: 0;
+}
+
+.fi-panel-admin .fi-topbar > * {
+    background-color: #f4f8f6;
+    box-shadow: none;
+}
+
+.fi-panel-admin .fi-sidebar,
+.fi-panel-admin .fi-sidebar-header {
+    background-color: #176e64;
+}
+
+.fi-panel-admin .fi-sidebar-header {
+    border-color: transparent;
+    box-shadow: none;
+}
+
+.fi-panel-admin .fi-sidebar-group-label,
+.fi-panel-admin .fi-sidebar-item-label,
+.fi-panel-admin .fi-sidebar-item-icon {
+    color: rgb(255 255 255 / 88%);
+}
+
+.fi-panel-admin .fi-sidebar-item-button:hover,
+.fi-panel-admin .fi-sidebar-item-button:focus-visible {
+    background-color: rgb(255 255 255 / 13%);
+}
+
+.fi-panel-admin .fi-sidebar-item-button {
+    transition: background-color 200ms ease, color 200ms ease, transform 220ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 200ms ease;
+}
+
+.fi-panel-admin .fi-sidebar-item-icon,
+.fi-panel-admin .fi-sidebar-item-label {
+    transition: color 200ms ease, opacity 200ms ease, transform 220ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.fi-panel-admin .fi-sidebar-item-active .fi-sidebar-item-button {
+    background-color: #659f17;
+    box-shadow: inset 3px 0 0 rgb(255 255 255 / 75%);
+    transform: translateX(3px);
+}
+
+.fi-panel-admin .fi-sidebar-item-active .fi-sidebar-item-label,
+.fi-panel-admin .fi-sidebar-item-active .fi-sidebar-item-icon {
+    color: #ffffff;
+}
+
+.fi-panel-admin .fi-header-heading {
+    color: #145c54;
+}
+
+.fi-panel-admin .fi-wi-stats-overview-stat,
+.fi-panel-admin .fi-section {
+    border: 1px solid #e1ece8;
+    box-shadow: 0 8px 24px rgb(16 76 69 / 7%);
+}
+
+.fi-panel-admin .fi-simple-layout {
+    background-color: #f4f8f6;
+}
+
+.fi-panel-admin .fi-simple-main {
+    border-top: 3px solid #659f17;
+    border-radius: 12px;
+    box-shadow: 0 18px 48px rgb(16 76 69 / 10%);
+}
+
+@media (min-width: 1024px) {
+    .fi-panel-admin .fi-main-sidebar {
+        transition: width 300ms cubic-bezier(0.22, 1, 0.36, 1), transform 300ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 250ms ease;
+    }
+
+    .fi-panel-admin .fi-main-ctn {
+        transition: width 300ms cubic-bezier(0.22, 1, 0.36, 1), margin 300ms cubic-bezier(0.22, 1, 0.36, 1), flex-basis 300ms cubic-bezier(0.22, 1, 0.36, 1), opacity 180ms ease;
+    }
+}
+
+:root.dark .fi-body.fi-panel-admin {
+    background-color: #0c3936;
+    color: #f1f8f6;
+}
+
+:root.dark .fi-panel-admin .fi-topbar {
+    background-color: #0c3936;
+    border-color: transparent;
+}
+
+:root.dark .fi-panel-admin .fi-topbar > * {
+    background-color: #0c3936;
+}
+
+:root.dark .fi-panel-admin .fi-sidebar,
+:root.dark .fi-panel-admin .fi-sidebar-header {
+    background-color: #0b302e;
+    border-color: transparent;
+    box-shadow: none;
+}
+
+:root.dark .fi-panel-admin .fi-sidebar-item-label,
+:root.dark .fi-panel-admin .fi-sidebar-item-icon {
+    color: rgb(255 255 255 / 82%);
+}
+
+:root.dark .fi-panel-admin .fi-sidebar-item-button:hover,
+:root.dark .fi-panel-admin .fi-sidebar-item-button:focus-visible {
+    background-color: rgb(255 255 255 / 11%);
+}
+
+:root.dark .fi-panel-admin .fi-sidebar-item-active .fi-sidebar-item-button {
+    background-color: #659f17;
+    box-shadow: inset 3px 0 0 rgb(255 255 255 / 85%);
+}
+
+:root.dark .fi-panel-admin .fi-wi-stats-overview-stat,
+:root.dark .fi-panel-admin .fi-section {
+    background-color: #124d49;
+    border-color: rgb(255 255 255 / 9%);
+    box-shadow: 0 8px 24px rgb(0 0 0 / 12%);
+}
+
+:root.dark .fi-panel-admin .fi-section-content-ctn {
+    border-color: rgb(255 255 255 / 12%);
+}
+
+:root.dark .fi-panel-admin .fi-header-heading {
+    color: #f1f8f6;
+}
+
+:root.dark .fi-panel-admin .fi-simple-layout {
+    background-color: #0c3936;
+}
+
+:root.dark .fi-panel-admin .fi-simple-main {
+    background-color: #124d49;
+    border-color: #659f17;
+    box-shadow: 0 18px 48px rgb(0 0 0 / 24%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .fi-panel-admin .fi-main-sidebar,
+    .fi-panel-admin .fi-main-ctn,
+    .fi-panel-admin .fi-sidebar-item-button,
+    .fi-panel-admin .fi-sidebar-item-icon,
+    .fi-panel-admin .fi-sidebar-item-label {
+        transition-duration: 0.01ms !important;
+    }
+}

@@ -2,12 +2,19 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Filament\Models\Contracts\HasName;
+use Spatie\Permission\Traits\HasRoles;
 
-class Usuario extends Model
+class Usuario extends Authenticatable implements HasName
 {
+    use Notifiable, HasRoles;
+
     protected $table = 'usuarios';
+
+    protected $authPasswordName = 'contraseña';
 
     protected $fillable = [
         'nombre',
@@ -17,6 +24,23 @@ class Usuario extends Model
         'rol',
         'estado',
     ];
+
+    protected $hidden = [
+        'contraseña',
+        'remember_token',
+    ];
+
+    protected function casts(): array
+    {
+        return [
+            'contraseña' => 'hashed',
+        ];
+    }
+
+    public function getFilamentName(): string
+    {
+        return trim("{$this->nombre} {$this->apellido}") ?: $this->correo;
+    }
 
     public function recepciones(): HasMany
     {

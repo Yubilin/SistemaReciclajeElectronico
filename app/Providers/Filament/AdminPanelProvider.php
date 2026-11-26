@@ -5,9 +5,11 @@ namespace App\Providers\Filament;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
+use App\Filament\Auth\Login;
 use Filament\Pages;
 use Filament\Panel;
 use Filament\PanelProvider;
+use Filament\Support\Assets\Css;
 use Filament\Support\Colors\Color;
 use Filament\Widgets;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
@@ -26,28 +28,41 @@ class AdminPanelProvider extends PanelProvider
             ->default()
             ->id('admin')
             ->path('admin')
-            ->login()
+            ->login(Login::class)
+            ->brandName('Panel de Administración - RAEE')
+            ->navigationGroups([
+                '1. Preparación',
+                '2. Recepción de equipos',
+                '3. Recuperación y componentes',
+                '4. Inventario',
+                '5. Administración',
+            ])
+            ->assets([
+                Css::make('raee-admin-theme', asset('css/raee-admin-theme.css')),
+            ])
             ->colors([
-                // 🎨 Paleta personalizada RAEE (Funciona sin Vite)
-                'primary' => Color::hex('#056C8E'),      // Cerulean
+                'primary' => Color::hex('#659F17'),      // Fern
                 'success' => Color::hex('#659F17'),      // Fern
                 'danger'  => Color::hex('#dc2626'),      
                 'warning' => Color::hex('#f59e0b'),      
                 'info'    => Color::hex('#116D64'),      // Spruce
             ])
-            ->brandName('RAEE System')
-            ->favicon(asset('favicon.ico'))
-            ->darkMode(true) // ✅ Activa el toggle de modo oscuro/claro
+            ->brandLogo(asset('images/raee-symbol.png'))
+            ->brandLogoHeight('3.5rem')
+            ->favicon(asset('images/raee-symbol.png'))
+            ->darkMode(true)
             ->sidebarCollapsibleOnDesktop()
-            // ❌ Eliminamos la línea ->viteTheme(...) para evitar el error de Node.js
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
             ->pages([
                 Pages\Dashboard::class,
             ])
-            ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
+            // ❌ ELIMINAMOS discoverWidgets para evitar duplicados o conflictos de grid
             ->widgets([
-                Widgets\AccountWidget::class,
+                \App\Filament\Widgets\WelcomeWidget::class,                // sort -2
+                \App\Filament\Widgets\StatsWidget::class,                  // sort -1
+                \App\Filament\Widgets\MaterialesPorCategoriaChart::class,  // sort 1
+                \App\Filament\Widgets\RecepcionesRecientesChart::class,    // sort 3
             ])
             ->middleware([
                 EncryptCookies::class,
